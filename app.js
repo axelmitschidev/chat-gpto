@@ -11,6 +11,8 @@ const io = new Server(server)
 
 const PORT = process.env.SERVER_PORT
 
+app.use('/assets', express.static(path.join(__dirname, './public/assets/')))
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'))
 })
