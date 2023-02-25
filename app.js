@@ -21,8 +21,8 @@ io.on('connection', socket => {
     console.log('A user is connected')
 
     socket.on('chat message', msg => {
-        socket.emit('write message', msg)
-        socket.broadcast('write message', msg)
+        socket.emit('draw message', msg)
+        socket.broadcast.emit('draw message', msg)
     })
 })
 
