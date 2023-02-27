@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="/assets/js/socket.io.js" defer></script>
     <script src="/assets/js/main.js" defer></script>
 
@@ -11,8 +12,11 @@
 </head>
 <body>
     <h1>Chat GPTO</h1>
-
-    <textarea placeholder="message text" id="textarea-msg" cols="30" rows="10"></textarea>
-    <button id="btn-send-msg">ping</button>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input class="input"  id="textarea-msg"/> <button id="btn-send-msg">Send</button>
+    </form>
+    <!--<textarea placeholder="message text" id="textarea-msg" cols="30" rows="10"></textarea>
+    <button id="btn-send-msg">ping</button>-->
 </body>
 </html>
