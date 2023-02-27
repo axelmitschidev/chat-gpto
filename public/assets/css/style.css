@@ -1,7 +1,15 @@
+@font-face {
+    font-family: game;
+    src: url(/public/assets/css/font/game\ \(1\).otf);
+  }
+
 body {
     margin: 0;
     padding-bottom: 3rem;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin-left: 10vh;
+    background-image: url(/assets/image/background.png);
+    color: #fff;
 }
 
 #form {
@@ -31,7 +39,7 @@ body {
 }
 
 #form>button {
-    background: #333;
+    background: #025EFF;
     border: none;
     padding: 0 1rem;
     margin: 0.25rem;
@@ -44,6 +52,7 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    
 }
 
 #messages>li {
@@ -52,4 +61,12 @@ body {
 
 #messages>li:nth-child(odd) {
     background: #efefef;
+}
+
+h1{
+    font-family: game;
+    text-shadow: burlywood;
+    text-align: center;
+    color: #fff;
+    font-size: 5rem;
 }
