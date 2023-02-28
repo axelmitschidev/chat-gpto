@@ -1,24 +1,28 @@
 require('dotenv').config()
 const path = require('path')
-
 const express = require('express')
+const mongoose = require('mongoose');
 const app = express()
-
 const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 const io = new Server(server)
-
 const banned_ips = []
 const history_ips = []
 let admin_ip = null
+const db = process.env.BDD_URL //path bdd a mettre ici
 
 const PORT = process.env.SERVER_PORT
+
+const userLoginRouteur = require('./routes/userLoginRouteur')
+
+
+app.use(userLoginRouteur)
 
 app.use('/assets', express.static(path.join(__dirname, './public/assets/')))
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'))
+  res.sendFile(path.join(__dirname, './public/index.twig'))
 })
 
 io.on('connection', (socket) => {
@@ -66,3 +70,6 @@ io.on('connection', (socket) => {
 })
 
 server.listen(PORT, () => console.log(`Listen on port ${PORT}`))
+
+mongoose.set('strictQuery', false);
+mongoose.connect(db)
