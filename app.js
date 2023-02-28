@@ -16,13 +16,16 @@ const PORT = process.env.SERVER_PORT
 
 const userLoginRouteur = require('./routes/userLoginRouteur')
 
+app.use(express.urlencoded({
+  extended:true
+}))
 
 app.use(userLoginRouteur)
 
 app.use('/assets', express.static(path.join(__dirname, './public/assets/')))
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.twig'))
+  res.sendFile(path.join(__dirname, './views/index.twig'))
 })
 
 io.on('connection', (socket) => {
@@ -71,5 +74,4 @@ io.on('connection', (socket) => {
 
 server.listen(PORT, () => console.log(`Listen on port ${PORT}`))
 
-mongoose.set('strictQuery', false);
-mongoose.connect(db)
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => { console.log('Connexion à la base de données réussie !'); }).catch((err) => { console.log('Erreur de connexion à la base de données :', err); });
