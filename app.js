@@ -1,6 +1,7 @@
 require('dotenv').config()
 const path = require('path')
 const express = require('express')
+const session = require("express-session")
 const mongoose = require('mongoose');
 const app = express()
 const http = require('http')
@@ -21,6 +22,9 @@ app.use(express.urlencoded({
 }))
 
 app.use(userLoginRouteur)
+
+app.use(session({secret: "azerty",saveUninitialized: true,resave: true}));
+
 
 app.use('/assets', express.static(path.join(__dirname, './public/assets/')))
 
