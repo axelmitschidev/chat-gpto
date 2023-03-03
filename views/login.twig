@@ -5,20 +5,26 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
+		<link rel="stylesheet" href="assets/css/registerLogion.css">
+		<title>login</title>
 	</head>
 
 	<body>
-		<h1>BIENVENUE SUR CHAT-GPTO</h1>
+		<h1 id='center'>BIENVENUE SUR CHAT-GPTO</h1>
+		<main>
 
-		<p>veuillez vous connecter</p>
-		<form action="/login" method="post" class='login-form'>
-			<input type="text" placeholder="login" name="nom">
-			<input type="password" placeholder="mot de passe" name="password">
-			<button type="submit">Valider</button>
-		</form>
-			<a href="/register"><button>s'enregistrer</button></a>
-
+			<div class="form">
+				<p>veuillez vous connecter</p>
+				<form action="/login" method="post" class='login-form'>
+					<input type="text" placeholder="login" name="nom">
+					<input type="password" placeholder="mot de passe" name="password">
+					<button type="submit">Valider</button>
+				</form>
+				<a href="/register">
+					<button>s'enregistrer</button>
+				</a>
+			</div>
+		</main>
 	</body>
 
 </html>
