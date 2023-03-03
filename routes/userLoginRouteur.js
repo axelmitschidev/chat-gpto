@@ -41,11 +41,12 @@ mainRouter.get('/login', async (req, res) => {
 mainRouter.post('/login', async (req, res) => {
     try {
         let user = await userModel.findOne({
-            name: req.body.name,
+            nom: req.body.nom,  
             password: req.body.password,
         })
+        console.log(user);
         if (user) {
-            req.session.userName = user.nom
+            req.session.userName = user.nom //lors du login, je sauvegarde en session le nom de l'utilisateur connecter pour l'utilisé avec socket.io
             req.session.userId = user._id
             res.redirect('/home')
         } else {

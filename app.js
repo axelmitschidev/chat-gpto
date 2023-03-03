@@ -8,11 +8,11 @@ const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 const io = new Server(server)
-let sharedsession = require("express-socket.io-session");
+let sharedsession = require("express-socket.io-session"); //cette bibliotheque permet a socket.io d'utiliser la session
 const banned_ips = []
 const history_ips = []
 let admin_ip = null
-const userSession = session({secret: "azerty",saveUninitialized: true,resave: true})
+const userSession = session({secret: "azerty",saveUninitialized: true,resave: true}) //je parametre la session dans une constante
 const db = process.env.BDD_URL //path bdd a mettre ici
 const PORT = process.env.SERVER_PORT
 
@@ -22,7 +22,7 @@ const userLoginRouteur = require('./routes/userLoginRouteur')
 app.use(express.urlencoded({
   extended:true
 }))
-app.use(userSession);
+app.use(userSession); // je place en tant que middleware d'express la session parametré plus haut
 app.use('/assets', express.static(path.join(__dirname, './public/assets/')))
 
 app.use(userLoginRouteur)
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './views/index.twig'))
 })
 
-io.use(sharedsession(userSession));
+io.use(sharedsession(userSession)); // je place en tant que middleware de socket io la session parametré plus haut (du coup, la session express et socket.io est la meme)
 
 io.on('connection', (socket) => {
   if (!history_ips.includes(socket.handshake.address)) {
@@ -42,8 +42,8 @@ io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     console.log(socket.handshake.session);
     if (msg.length <= 256 && !banned_ips.includes(socket.handshake.address)) {
-      socket.emit('draw message', socket.handshake.session.userName + ": " + msg)
-      socket.broadcast.emit('draw message', socket.handshake.session.userName + ": " + msg)
+      socket.emit('draw message', socket.handshake.session.userName + ": " + msg) //j'emet le message en le concatenant avec le nom de l'utilisateur conecté (je l'ai mis en session lors du log)
+      socket.broadcast.emit('draw message', socket.handshake.session.userName + ": " + msg) // pareil
     }
   })
 
