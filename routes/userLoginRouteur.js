@@ -45,7 +45,7 @@ mainRouter.post('/login', async (req, res) => {
             password: req.body.password,
         })
         if (user) {
-            
+            req.session.userName = user.nom
             req.session.userId = user._id
             res.redirect('/home')
         } else {
