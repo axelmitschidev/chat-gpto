@@ -2,7 +2,7 @@ const express = require("express");
 const mainRouter = express.Router()
 const userModel = require("../models/userModel");
 const authGuard = require("../services/authGuard")
-const session = require("express-session")
+
 mainRouter.get('/register', async (req, res) => {
     try {
         res.render('register.twig')
@@ -45,6 +45,7 @@ mainRouter.post('/login', async (req, res) => {
             password: req.body.password,
         })
         if (user) {
+            
             req.session.userId = user._id
             res.redirect('/home')
         } else {

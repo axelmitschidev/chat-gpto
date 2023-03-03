@@ -20,13 +20,11 @@ const userLoginRouteur = require('./routes/userLoginRouteur')
 app.use(express.urlencoded({
   extended:true
 }))
+app.use(session({secret: "azerty",saveUninitialized: true,resave: true}));
+app.use('/assets', express.static(path.join(__dirname, './public/assets/')))
 
 app.use(userLoginRouteur)
 
-app.use(session({secret: "azerty",saveUninitialized: true,resave: true}));
-
-
-app.use('/assets', express.static(path.join(__dirname, './public/assets/')))
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './views/index.twig'))
