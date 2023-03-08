@@ -1,5 +1,6 @@
 require('dotenv').config()
 const path = require('path')
+const store = require('node-localstorage')
 const express = require('express')
 const session = require("express-session")
 const mongoose = require('mongoose');
@@ -37,8 +38,8 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', (msg) => {
     if (msg.length <= 256 && !banned_ips.includes(socket.handshake.address)) {
-      socket.emit('draw message', msg)
-      socket.broadcast.emit('draw message', msg)
+      socket.emit('draw message', (req.session.userName + msg))
+      socket.broadcast.emit('draw message',( req.session.userName + msg))
     }
   })
 

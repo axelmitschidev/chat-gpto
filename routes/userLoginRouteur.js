@@ -2,6 +2,7 @@ const express = require("express");
 const mainRouter = express.Router()
 const userModel = require("../models/userModel");
 const authGuard = require("../services/authGuard")
+const store = require('store')
 
 mainRouter.get('/register', async (req, res) => {
     try {
@@ -47,6 +48,7 @@ mainRouter.post('/login', async (req, res) => {
         if (user) {
             
             req.session.userId = user._id
+            store.set('test',user.nom)
             res.redirect('/home')
         } else {
             res.redirect('login')
