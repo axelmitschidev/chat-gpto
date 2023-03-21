@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
     if (msg.length <= 256 && !banned_ips.includes(socket.handshake.address)) {
       socket.emit('draw message', (req.session.userName + msg))
       socket.broadcast.emit('draw message',( req.session.userName + msg))
-    }
+      }
   })
 
   socket.on('admin connect', (data) => {
